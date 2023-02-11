@@ -23,6 +23,8 @@ import {
   MenuItem,
   useTheme,
 } from "@mui/material";
+import profileImage from "assets/profie.jpeg";
+import { capitalizeRole } from "utilities/CommonUtility";
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
@@ -73,7 +75,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             <SettingsOutlined sx={{ fontSize: "25px" }} />
           </IconButton>
 
-          {/* <FlexBetween>
+           <FlexBetween>
             <Button
               onClick={handleClick}
               sx={{
@@ -105,7 +107,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                   fontSize="0.75rem"
                   sx={{ color: theme.palette.secondary[200] }}
                 >
-                  {user.occupation}
+                  {capitalizeRole(user.role)}
                 </Typography>
               </Box>
               <ArrowDropDownOutlined
@@ -120,7 +122,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             >
               <MenuItem onClick={handleClose}>Log Out</MenuItem>
             </Menu>
-          </FlexBetween> */}
+          </FlexBetween> 
         </FlexBetween>
       </Toolbar>
     </AppBar>
