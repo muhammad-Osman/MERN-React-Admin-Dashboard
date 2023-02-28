@@ -11,7 +11,9 @@ import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
 
 import User from "./model/User.js";
-import { dataUser } from "./data/index.js";
+import Product from './model/Product.js';
+import ProductStat from './model/ProductStat.js';
+import { dataUser, dataProduct, dataProductStat } from "./data/index.js";
 
 /* CONFIGURATION */
 dotenv.config();
@@ -41,12 +43,18 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() =>
-    app.listen(PORT, () =>
-      console.log(`Server Running on Port: http://localhost:${PORT}`)
-    )
-  )
-  .catch((error) => console.log(`\n\n${error} did not connect`));
+  .then(() => {
+  app.listen(PORT, () =>
+    console.log(`Server Running on Port: http://localhost:${PORT}`)
+  );
+
+  /* ONLY ADD DATA ONE TIME */
+  // Product.insertMany(dataProduct);
+  // ProductStat.insertMany(dataProductStat);
+  // User.insertMany(dataUser);
+
+
+}).catch((error) => console.log(`\n\n${error} did not connect`));
 
 // .then(() => {
 //   app.listen(PORT, () =>
