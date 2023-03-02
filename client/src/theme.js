@@ -39,7 +39,10 @@ export const tokensDark = {
     700: "#997d3d",
     800: "#665429",
     900: "#332a14",
-  },
+  }
+  // secondary2: {
+
+  // }
 };
 
 // function that reverses the color palette

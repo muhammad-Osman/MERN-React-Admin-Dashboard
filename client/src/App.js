@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { themeSettings } from "theme";
-import { Dashboard, Layout, Products } from "scenes";
+import { Dashboard, Layout, Products, Customers } from "scenes";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -19,6 +19,7 @@ function App() {
               <Route path = "/" element = {<Navigate to = "/dashboard" replase />} />
               <Route path = "/dashboard" element = {<Dashboard />} />
               <Route path = "/products" element = {<Products />} />
+              <Route path = "/customers" element = {<Customers />} />
             </Route>
           </Routes>
         </ThemeProvider>

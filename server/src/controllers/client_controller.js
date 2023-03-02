@@ -1,5 +1,6 @@
 import Product from "../model/Product.js";
 import ProductStat from "../model/ProductStat.js";
+import User from "../model/User.js";
 
 export const fetchProducts = async (req, res) => {
   try {
@@ -18,6 +19,16 @@ export const fetchProducts = async (req, res) => {
     );
 
     res.status(200).json(productWithStats);
+  } catch (e) {
+    res.status(404).json({ message: e.message });
+  }
+};
+
+export const fetchCustomers = async (req, res) => {
+  try {
+    const customers = await User.find({ role: "user" }).select("-password");
+
+    res.status(200).json(customers);
   } catch (e) {
     res.status(404).json({ message: e.message });
   }
