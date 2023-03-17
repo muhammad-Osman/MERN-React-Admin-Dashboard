@@ -2,6 +2,7 @@ import Product from "../model/Product.js";
 import ProductStat from "../model/ProductStat.js";
 import Transaction from "../model/Transaction.js";
 import User from "../model/User.js";
+import getCountryISO3 from "country-iso-2-to-3";
 
 export const fetchProducts = async (req, res) => {
   try {
@@ -70,6 +71,31 @@ export const fetchTransactions = async (req, res) => {
       total,
     });
   } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const fetchGeography = async (req, res) => {
+  try {
+    const user = await User.find();
+    const mapedLocations = user.reduce((acc, { country }) => {
+      const countryISO3 = getCountryISO3(country);
+      if (!acc[countryISO3]) {
+        acc[countryISO3] = 0;
+      }
+      acc[countryISO3]++;
+      return acc;
+    }, {});
+
+    const formattedLocations = Object.entries(mapedLocations).map(
+      ([country, count]) => {
+        return {   
+          id: country, value: count };
+      }
+    );
+
+    res.status(200).json(formattedLocations);
+  } catch (e) {
     res.status(404).json({ message: error.message });
   }
 };

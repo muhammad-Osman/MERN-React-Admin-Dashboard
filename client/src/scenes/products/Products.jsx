@@ -6,7 +6,6 @@ import {
 } from "@mui/material";
 import Header from "components/Header";
 import { useGetProductsQuery } from "state/api";
-import Loading from "components/Loading";
 import Product from "./product/Product";
 
 const Products = () => {
@@ -56,7 +55,7 @@ const Products = () => {
           )}
         </Box>
       ) : (
-        <Loading type="bars" color={theme.palette.secondary[400]} />
+        <>Loading...</>
       )}
     </Box>
   );
