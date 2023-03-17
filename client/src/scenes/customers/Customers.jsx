@@ -4,6 +4,7 @@ import { useGetCustomersQuery } from "state/api";
 import Header from "components/Header";
 import { DataGrid } from "@mui/x-data-grid";
 import { customerTableColumns } from "utilities/CommonUtility";
+import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 
 const Customers = () => {
   const theme = useTheme();
@@ -42,7 +43,13 @@ const Customers = () => {
           },
         }}
       >
-        <DataGrid loading={isLoading || !data} getRowId={(row) => row._id} rows={data || []} columns={customerTableColumns}/>
+        <DataGrid
+          loading={isLoading || !data}
+          getRowId={(row) => row._id}
+          rows={data || []}
+          columns={customerTableColumns}
+          components={{Toolbar: DataGridCustomToolbar}}
+        />
       </Box>
     </Box>
   );
