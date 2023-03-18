@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Box,
-  useTheme,
   useMediaQuery,
 } from "@mui/material";
 import Header from "components/Header";
@@ -11,7 +10,6 @@ import Product from "./product/Product";
 const Products = () => {
   const { data, isLoading } = useGetProductsQuery();
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
-  const theme = useTheme();
 
   console.log(data);
   return (

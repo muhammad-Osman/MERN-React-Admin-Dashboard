@@ -11,10 +11,17 @@ import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
 
 import User from "./model/User.js";
-import Product from './model/Product.js';
-import ProductStat from './model/ProductStat.js';
+import Product from "./model/Product.js";
+import ProductStat from "./model/ProductStat.js";
 import Transaction from "./model/Transaction.js";
-import { dataUser, dataProduct, dataProductStat, dataTransaction } from "./data/index.js";
+import OverallStat from "./model/OverallStat.js";
+import {
+  dataUser,
+  dataProduct,
+  dataProductStat,
+  dataTransaction,
+  dataOverallStat
+} from "./data/index.js";
 
 /* CONFIGURATION */
 dotenv.config();
@@ -45,18 +52,18 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-  app.listen(PORT, () =>
-    console.log(`Server Running on Port: http://localhost:${PORT}`)
-  );
+    app.listen(PORT, () =>
+      console.log(`Server Running on Port: http://localhost:${PORT}`)
+    );
 
-  /* ONLY ADD DATA ONE TIME */
-  // Product.insertMany(dataProduct);
-  // ProductStat.insertMany(dataProductStat);
-  // Transaction.insertMany(dataTransaction);
-  // User.insertMany(dataUser);
-
-
-}).catch((error) => console.log(`\n\n${error} did not connect`));
+    /* ONLY ADD DATA ONE TIME */
+    // OverallStat.insertMany(dataOverallStat);
+    // Product.insertMany(dataProduct);
+    // ProductStat.insertMany(dataProductStat);
+    // Transaction.insertMany(dataTransaction);
+    // User.insertMany(dataUser);
+  })
+  .catch((error) => console.log(`\n\n${error} did not connect`));
 
 // .then(() => {
 //   app.listen(PORT, () =>
