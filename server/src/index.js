@@ -15,12 +15,14 @@ import Product from "./model/Product.js";
 import ProductStat from "./model/ProductStat.js";
 import Transaction from "./model/Transaction.js";
 import OverallStat from "./model/OverallStat.js";
+import AffiliateStat from "./model/AffiliateStat.js";
 import {
   dataUser,
   dataProduct,
   dataProductStat,
   dataTransaction,
-  dataOverallStat
+  dataOverallStat,
+  dataAffiliateStat
 } from "./data/index.js";
 
 /* CONFIGURATION */
@@ -57,6 +59,7 @@ mongoose
     );
 
     /* ONLY ADD DATA ONE TIME */
+    // AffiliateStat.insertMany(dataAffiliateStat);
     // OverallStat.insertMany(dataOverallStat);
     // Product.insertMany(dataProduct);
     // ProductStat.insertMany(dataProductStat);

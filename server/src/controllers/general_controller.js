@@ -2,6 +2,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import User from "../model/User.js";
+import OverallStat from "../model/OverallStat.js";
+import Transaction from "../model/Transaction.js";
 
 export const signup = async (req, res) => {
   const {
@@ -87,11 +89,9 @@ export const signin = async (req, res) => {
     if (!isPasswordCorrect)
       return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign(
-      { id: oldUser._id },
-      process.env.SECRET_KEY,
-      { expiresIn: "148h" }
-    );
+    const token = jwt.sign({ id: oldUser._id }, process.env.SECRET_KEY, {
+      expiresIn: "148h",
+    });
 
     res
       .status(200)
@@ -105,12 +105,58 @@ export const signin = async (req, res) => {
 
 export const fetchUser = async (req, res) => {
   try {
-      const id = req.params.id;
+    const id = req.params.id;
 
-      const result = await User.findById(id);
+    const result = await User.findById(id);
 
-      res.status(200).json(result);
-  } catch(e) {
-    res.status(404).json({message: e.message});
+    res.status(200).json(result);
+  } catch (e) {
+    res.status(404).json({ message: e.message });
   }
-}
+};
+
+export const getDashboardStats = async (req, res) => {
+  try {
+    // hardcoded values
+    const currentMonth = "November";
+    const currentYear = 2021;
+    const currentDay = "2021-11-15";
+
+    /* Recent Transactions */
+    const transactions = await Transaction.find()
+      .limit(50)
+      .sort({ createdOn: -1 });
+
+    /* Overall Stats */
+    const overallStat = await OverallStat.find({ year: currentYear });
+
+    const {
+      totalCustomers,
+      yearlyTotalSoldUnits,
+      yearlySalesTotal,
+      monthlyData,
+      salesByCategory,
+    } = overallStat[0];
+
+    const thisMonthStats = overallStat[0].monthlyData.find(({ month }) => {
+      return month === currentMonth;
+    });
+
+    const todayStats = overallStat[0].dailyData.find(({ date }) => {
+      return date === currentDay;
+    });
+
+    res.status(200).json({
+      totalCustomers,
+      yearlyTotalSoldUnits,
+      yearlySalesTotal,
+      monthlyData,
+      salesByCategory,
+      thisMonthStats,
+      todayStats,
+      transactions,
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
