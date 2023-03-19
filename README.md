@@ -2,7 +2,7 @@
 Build and Deploy a MERN Stack Admin Dashboard tutorial. For frontend, we will be using Material UI, Material UI Data Grid, Nivo Charts, Redux Toolkit and Redux Toolkit Query. For backend, we will be using Node JS, Express Js, Mongoose, and MongoDB. We will also go through how to Data Model using Entity Relationship Diagrams as well as making aggregate calls in MongoDB.
 
 Links:
-Node: https://nodejs.org/en/download/
+``` Node: https://nodejs.org/en/download/
 NPX: https://www.npmjs.com/package/npx
 VSCode: https://code.visualstudio.com/download
 Nodemon: https://github.com/remy/nodemon
